@@ -30,6 +30,22 @@ describe('App', () => {
     expect(screen.getByRole('alert')).toHaveTextContent('Amount must be a positive number');
   });
 
+  it('shows an empty state before any transaction is added', () => {
+    render(<App />);
+    expect(screen.getByText(/Nothing recorded yet/)).toBeInTheDocument();
+    expect(screen.getByTestId('balance')).toHaveTextContent('0.00');
+  });
+
+  it('shows spending per category and the amount left under the limit', async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await add(user, 'Lunch', '40');
+    expect(screen.getByText('460.00 left')).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'Spent 40.00 of 500.00 limit' })).toBeInTheDocument();
+    const legendItem = screen.getByText('Food', { selector: '.legend li' });
+    expect(legendItem).toHaveTextContent('40.00');
+  });
+
   it('warns when over the budget limit and can delete', async () => {
     const user = userEvent.setup();
     render(<App />);
