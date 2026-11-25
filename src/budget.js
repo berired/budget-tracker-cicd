@@ -44,5 +44,5 @@ export function expensesByCategory(transactions) {
 /** True when expenses strictly exceed the budget limit. */
 export function isOverBudget(transactions, limit) {
   if (!Number.isFinite(limit) || limit < 0) throw new Error('Limit must be zero or more');
-  return calculateSummary(transactions).expenses >= limit;
+  return calculateSummary(transactions).expenses > limit;
 }
