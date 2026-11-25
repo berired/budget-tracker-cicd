@@ -1,0 +1,42 @@
+jenkins:
+  systemMessage: "Budget Tracker CI/CD lab"
+  numExecutors: 2
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          password: "${JENKINS_ADMIN_PASSWORD:-admin123}"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+
+unclassified:
+  location:
+    url: "http://localhost:8080/"
+  sonarGlobalConfiguration:
+    buildWrapperEnabled: true
+    installations:
+      - name: "SonarQube"
+        serverUrl: "http://sonarqube:9000"
+        # create a Jenkins "Secret text" credential with this id after generating a Sonar token
+        credentialsId: "sonar-token"
+
+tool:
+  nodejs:
+    installations:
+      - name: "node22"
+        properties:
+          - installSource:
+              installers:
+                - nodeJSInstaller:
+                    id: "22.14.0"
+                    npmPackagesRefreshHours: 72
+  sonarRunnerInstallation:
+    installations:
+      - name: "SonarScanner"
+        properties:
+          - installSource:
+              installers:
+                - sonarRunnerInstaller:
+                    id: "6.2.1.4610"

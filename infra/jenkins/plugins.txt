@@ -1,0 +1,12 @@
+workflow-aggregator
+pipeline-stage-view
+git
+github
+github-branch-source
+nodejs
+sonar
+copyartifact
+docker-workflow
+timestamper
+credentials-binding
+configuration-as-code

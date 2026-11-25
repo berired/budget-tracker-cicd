@@ -6,8 +6,8 @@ pipeline {
     agent any
 
     tools {
-        // Configure a NodeJS installation named "node20" in Manage Jenkins > Tools
-        nodejs 'node20'
+        // Configure a NodeJS 22 installation named "node22" in Manage Jenkins > Tools
+        nodejs 'node22'
     }
 
     options {
