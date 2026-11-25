@@ -65,7 +65,18 @@ Result at time of writing: **0 vulnerabilities**.
 Initially `npm audit` reported 10 findings (e.g. critical *tinypool* prototype pollution, moderate *esbuild* dev-server request issue) all pulled in transitively by the test/build tooling (`vitest@2`, `vite@5`). Remediation was to upgrade to the patched major versions (`vitest@5`, `vite@8`, `@vitest/coverage-v8@5`) and re-run `npm audit`.
 
 ## Failure and recovery demonstration
-_(fill in)_ Describe the failing test / gate, the Jenkins build that failed, the cause, the fix, and the passing rerun.
+Demonstrated on `feature/add-validation` (failed test).
+
+| Build | Commit | Result |
+|---|---|---|
+| #6 | "Treat spending equal to the limit as over budget" | **FAILED** at *Install and Test*; Coverage, SonarQube, Quality Gate, Build and Archive were skipped |
+| #7 | "Fix off-by-one: spending equal to the limit is not over budget" | **SUCCESS**, 20/20 tests pass |
+
+**Cause.** In `src/budget.js`, `isOverBudget` was changed from `expenses > limit` to `expenses >= limit`. An off-by-one error like this flags a budget that has been spent *exactly* as over budget. The boundary test `isOverBudget > is false when expenses equal the limit (boundary)` failed with `AssertionError: expected true to be false`, and Jenkins stopped the pipeline at the test stage.
+
+**Correction.** Restore the strict comparison (`>`), so only spending above the limit counts as over budget. The unchanged test passes and the pipeline runs through to the end for this branch.
+
+**Why it matters.** The boundary test, not just line coverage, caught a real defect that coverage alone would have missed (the faulty line was still executed by the tests).
 
 ## Notes
 Coverage does not guarantee defect-free software; tests assert concrete values and error messages rather than only executing code.
