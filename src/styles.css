@@ -1,0 +1,6 @@
+body { font-family: system-ui, sans-serif; background: #f4f6f8; margin: 0; }
+.app { max-width: 560px; margin: 2rem auto; padding: 1.5rem; background: #fff; border-radius: 8px; }
+.summary { display: flex; justify-content: space-between; margin-bottom: 1rem; }
+form { display: flex; gap: .5rem; flex-wrap: wrap; margin: 1rem 0; }
+.error, .warn { color: #b00020; }
+li button { margin-left: .5rem; }
