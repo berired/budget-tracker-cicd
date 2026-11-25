@@ -25,12 +25,12 @@ unclassified:
 tool:
   nodejs:
     installations:
-      - name: "node22"
+      - name: "node24"
         properties:
           - installSource:
               installers:
                 - nodeJSInstaller:
-                    id: "22.14.0"
+                    id: "24.11.0"
                     npmPackagesRefreshHours: 72
   sonarRunnerInstallation:
     installations:

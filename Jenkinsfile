@@ -6,8 +6,8 @@ pipeline {
     agent any
 
     tools {
-        // Configure a NodeJS 22 installation named "node22" in Manage Jenkins > Tools
-        nodejs 'node22'
+        // Configure a NodeJS 24 installation named "node24" in Manage Jenkins > Tools
+        nodejs 'node24'
     }
 
     options {

@@ -33,7 +33,7 @@ A failing test stops the pipeline. On `main`, a failed quality gate (coverage < 
 
 ## Jenkins setup
 1. **Plugins:** Pipeline, Multibranch/GitHub Branch Source, NodeJS, SonarQube Scanner, Copy Artifact.
-2. **Tools** (Manage Jenkins > Tools): NodeJS 22 installation named `node22` (vitest 5 / vite 8 need Node >= 22); SonarQube Scanner named `SonarScanner`.
+2. **Tools** (Manage Jenkins > Tools): NodeJS 24 installation named `node24` (vitest 5 / vite 8 / jsdom 31 need a recent Node); SonarQube Scanner named `SonarScanner`.
 3. **System:** SonarQube server named `SonarQube` (URL + token stored as a Jenkins *secret text* credential). Add a SonarQube webhook `http://<jenkins>/sonarqube-webhook/` so `waitForQualityGate` returns.
 4. **Docker:** the Jenkins agent must be able to run `docker` (e.g. mount `/var/run/docker.sock`, install the docker CLI).
 5. **CI job:** New Item > *Multibranch Pipeline* named **`budget-tracker-ci`**, source GitHub (this repo), script path `Jenkinsfile`. Enable a GitHub webhook (`/github-webhook/`) or periodic scan for automatic triggering.
