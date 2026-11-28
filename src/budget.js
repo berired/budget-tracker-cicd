@@ -46,16 +46,3 @@ export function isOverBudget(transactions, limit) {
   if (!Number.isFinite(limit) || limit < 0) throw new Error('Limit must be zero or more');
   return calculateSummary(transactions).expenses > limit;
 }
-
-// INTENTIONAL ISSUE: added to deliberately fail the SonarQube quality gate.
-// Contains a hardcoded credential, eval(), a self-assignment bug, and no test coverage.
-export function unsafeExport(transactions, expression) {
-  const password = 'admin123';
-  const apiToken = 'hardcoded-demo-token-12345';
-  let count = transactions.length;
-  count = count;
-  if (count == null) {
-    return eval(expression);
-  }
-  return { password, apiToken, count };
-}
